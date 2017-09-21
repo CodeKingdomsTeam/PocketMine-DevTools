@@ -41,7 +41,10 @@ class DevTools extends PluginBase implements CommandExecutor{
 	}
 
 	public function onEnable(){
-		@mkdir($this->getDataFolder());
+		$dataFolder = $this->getDataFolder();
+		if( !is_dir($dataFolder) ) {
+			@mkdir($dataFolder);
+		}
 
 		$this->getServer()->getPluginManager()->registerInterface("FolderPluginLoader\\FolderPluginLoader");
 		$this->getServer()->getPluginManager()->loadPlugins($this->getServer()->getPluginPath(), ["FolderPluginLoader\\FolderPluginLoader"]);
