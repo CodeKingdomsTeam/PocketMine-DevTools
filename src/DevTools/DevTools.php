@@ -43,7 +43,10 @@ class DevTools extends PluginBase{
 	}
 
 	public function onEnable() : void{
-		@mkdir($this->getDataFolder());
+		$dataFolder = $this->getDataFolder();
+		if( !is_dir($dataFolder) ) {
+			@mkdir($dataFolder);
+		}
 
 		$this->getServer()->getPluginManager()->registerInterface(new FolderPluginLoader($this->getServer()->getLoader()));
 		$this->getServer()->getPluginManager()->loadPlugins($this->getServer()->getPluginPath(), [FolderPluginLoader::class]);
